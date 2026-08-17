@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ReUnite Families</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='index.css') }}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="/" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="/search" class="nav-item">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Search</span>
+        </a>
+
+        <a href="/about" class="nav-item">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>About</span>
+        </a>
+
+        <a href="/register" class="nav-item">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Register</span>
+        </a>
+
+        <a href="/signin" class="nav-item">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>Sign In</span>
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Re<span>Unite</span> Families,<br>
+            Even Without Internet
+        </h1>
+
+        <p>
+            An offline-first system to help disaster-affected families
+            find and reunite with their loved ones.
+        </p>
+
+        <div class="features">
+
+            <div class="feature">
+                <i class="fa-solid fa-wifi"></i>
+                <span>Works Offline</span>
+            </div>
+
+            <div class="feature">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Safe & Secure</span>
+            </div>
+
+            <div class="feature">
+                <i class="fa-solid fa-users"></i>
+                <span>Built for Relief Camps</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Family Illustration -->
+
+    <div class="hero-image">
+
+        <div class="house">
+
+            <div class="roof"></div>
+
+            <div class="family">
+
+                <div class="person adult left">
+                    <div class="head"></div>
+                    <div class="body"></div>
+                </div>
+
+                <div class="person child">
+                    <div class="head"></div>
+                    <div class="body"></div>
+                </div>
+
+                <div class="person adult right">
+                    <div class="head"></div>
+                    <div class="body"></div>
+                </div>
+
+            </div>
+
+            <div class="heart">
+                ♥
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ACTION CARDS ================= -->
+
+<section class="actions">
+
+    <!-- Register -->
+
+    <div class="action-card blue-card">
+
+        <div class="icon-circle blue-icon">
+            <i class="fa-solid fa-user-plus"></i>
+        </div>
+
+        <h2>Register Person <span>›</span></h2>
+
+        <p>
+            Add details of a displaced person
+            in this camp.
+        </p>
+
+        <a href="/register" class="action-button blue-button">
+            <i class="fa-solid fa-plus"></i>
+            New Registration
+        </a>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <div class="action-card green-card">
+
+        <div class="icon-circle green-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <h2>Find Family Member <span>›</span></h2>
+
+        <p>
+            Search for your loved ones
+            across local records.
+        </p>
+
+        <a href="/search" class="action-button green-button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Search Now
+        </a>
+
+    </div>
+
+
+    <!-- QR -->
+
+    <div class="action-card purple-card">
+
+        <div class="icon-circle purple-icon">
+            <i class="fa-solid fa-qrcode"></i>
+        </div>
+
+        <h2>Scan QR Code <span>›</span></h2>
+
+        <p>
+            Scan QR to view person /
+            family details instantly.
+        </p>
+
+        <a href="#" class="action-button purple-button">
+            <i class="fa-solid fa-camera"></i>
+            Scan QR
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= OFFLINE STATUS ================= -->
+
+<section class="offline-box">
+
+    <div class="offline-icon">
+        <i class="fa-solid fa-wifi"></i>
+    </div>
+
+    <div class="offline-text">
+
+        <h2>You are in Offline Mode</h2>
+
+        <p>
+            All data is being saved locally.
+            It will automatically sync when the network is available.
+        </p>
+
+    </div>
+
+    <button class="sync-button">
+        <i class="fa-solid fa-rotate"></i>
+        Sync Status
+    </button>
+
+</section>
+
+
+<!-- ================= STATISTICS ================= -->
+
+<section class="statistics">
+
+    <div class="stat-card">
+
+        <div class="stat-icon blue-stat">
+            <i class="fa-solid fa-users"></i>
+        </div>
+
+        <h3>Total Registered</h3>
+
+        <strong>0</strong>
+
+        <p>people</p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon pink-stat">
+            <i class="fa-solid fa-heart"></i>
+        </div>
+
+        <h3>Family Matches</h3>
+
+        <strong>0</strong>
+
+        <p>reunited</p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon purple-stat">
+            <i class="fa-solid fa-rotate"></i>
+        </div>
+
+        <h3>Pending Sync</h3>
+
+        <strong>17</strong>
+
+        <p>records</p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon green-stat">
+            <i class="fa-solid fa-user-plus"></i>
+        </div>
+
+        <h3>New Entries</h3>
+
+        <strong>0</strong>
+
+        <p>new entries</p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CAMPS ================= -->
+
+<a href="/camps" class="camp-section">
+
+    <div class="camp-icon">
+        <i class="fa-solid fa-tent"></i>
+    </div>
+
+    <div class="camp-text">
+
+        <h2>Camps</h2>
+
+        <p>
+            View and manage relief camps.
+        </p>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right camp-arrow"></i>
+
+</a>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div>
+        Together We Rebuild
+    </div>
+
+    <span>|</span>
+
+    <div>
+        No One Left Behind
+    </div>
+
+    <div class="footer-badge">
+        <i class="fa-regular fa-heart"></i>
+        Disaster Relief Technology
+    </div>
+
+</footer>
+
+
+</body>
+</html>

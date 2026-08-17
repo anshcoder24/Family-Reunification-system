@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register Person | ReUnite</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='register.css') }}">
+
+</head>
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="/" class="logo">
+            <i class="fa-solid fa-people-arrows"></i>
+            <span>Re<span>Unite</span></span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="/">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+
+            <a href="/search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </a>
+
+            <a href="/about">
+                <i class="fa-solid fa-circle-info"></i>
+                About
+            </a>
+
+            <a href="/register" class="active">
+                <i class="fa-solid fa-user-plus"></i>
+                Register
+            </a>
+
+            <a href="/signin">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Sign In
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= PAGE HEADER ================= -->
+
+<section class="page-header">
+
+    <div>
+
+        <div class="breadcrumb">
+
+            <a href="/">Home</a>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <span>Register Person</span>
+
+        </div>
+
+        <h1>
+            Register Person
+        </h1>
+
+        <p>
+            Register a displaced person to help reconnect
+            them with their family.
+        </p>
+
+    </div>
+
+
+    <div class="header-icon">
+
+        <i class="fa-solid fa-user-plus"></i>
+
+    </div>
+
+</section>
+
+
+<!-- ================= OFFLINE STATUS ================= -->
+
+<div class="offline-status">
+
+    <div class="offline-icon">
+
+        <i class="fa-solid fa-wifi"></i>
+
+    </div>
+
+    <div>
+
+        <strong>Offline Mode</strong>
+
+        <p>
+            Registration can be saved even without internet.
+        </p>
+
+    </div>
+
+    <span class="pending">
+
+        <i class="fa-solid fa-circle"></i>
+
+        Pending Sync
+
+    </span>
+
+</div>
+
+
+<!-- ================= REGISTRATION FORM ================= -->
+
+<main class="form-container">
+
+    <form action="/register"
+          method="POST"
+          enctype="multipart/form-data">
+
+
+        <!-- ================= PERSONAL DETAILS ================= -->
+
+        <section class="form-section">
+
+            <div class="section-heading">
+
+                <div class="section-icon blue">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>Personal Details</h2>
+
+                    <p>
+                        Basic information of the displaced person.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <!-- FULL NAME -->
+
+                <div class="form-group full">
+
+                    <label for="name">
+
+                        Full Name
+
+                        <span>*</span>
+
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter full name"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AGE -->
+
+                <div class="form-group">
+
+                    <label for="age">
+
+                        Age
+
+                        <span>*</span>
+
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-calendar"></i>
+
+                        <input
+                            type="number"
+                            id="age"
+                            name="age"
+                            min="0"
+                            max="120"
+                            placeholder="Enter age"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- GENDER -->
+
+                <div class="form-group">
+
+                    <label for="gender">
+
+                        Gender
+
+                        <span>*</span>
+
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-venus-mars"></i>
+
+                        <select
+                            id="gender"
+                            name="gender"
+                            required>
+
+                            <option value="">
+                                Select Gender
+                            </option>
+
+                            <option value="Male">
+                                Male
+                            </option>
+
+                            <option value="Female">
+                                Female
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= LOCATION ================= -->
+
+        <section class="form-section">
+
+            <div class="section-heading">
+
+                <div class="section-icon green">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>Current Location</h2>
+
+                    <p>
+                        Where the person is currently staying.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="camp">
+
+                    Current Camp / Location
+
+                    <span>*</span>
+
+                </label>
+
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-tent"></i>
+
+                    <input
+                        type="text"
+                        id="camp"
+                        name="camp"
+                        placeholder="Enter camp or current location"
+                        required>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FAMILY INFORMATION ================= -->
+
+        <section class="form-section">
+
+            <div class="section-heading">
+
+                <div class="section-icon pink">
+
+                    <i class="fa-solid fa-people-roof"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>Family Information</h2>
+
+                    <p>
+                        Information about the family member they want to find.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="family_name">
+
+                    Family Member Name
+
+                    <span>*</span>
+
+                </label>
+
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-user-group"></i>
+
+                    <input
+                        type="text"
+                        id="family_name"
+                        name="family_name"
+                        placeholder="Enter family member name"
+                        required>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= OPTIONAL INFORMATION ================= -->
+
+        <section class="form-section">
+
+            <div class="section-heading">
+
+                <div class="section-icon purple">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>Additional Information</h2>
+
+                    <p>
+                        These details are optional.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- MOBILE -->
+
+            <div class="form-group">
+
+                <label for="phone">
+
+                    Mobile Number
+
+                    <small>(Optional)</small>
+
+                </label>
+
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        maxlength="10"
+                        placeholder="Enter mobile number">
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO -->
+
+            <div class="photo-upload">
+
+                <div class="photo-icon">
+
+                    <i class="fa-solid fa-camera"></i>
+
+                </div>
+
+
+                <div class="photo-content">
+
+                    <h3>
+                        Person Photo
+                        <small>(Optional)</small>
+                    </h3>
+
+                    <p>
+                        A photo can help with identification.
+                    </p>
+
+                    <label for="photo"
+                           class="upload-button">
+
+                        <i class="fa-solid fa-upload"></i>
+
+                        Upload Photo
+
+                    </label>
+
+                    <input
+                        type="file"
+                        id="photo"
+                        name="photo"
+                        accept="image/*"
+                        hidden>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CONSENT ================= -->
+
+        <section class="consent-section">
+
+            <div class="consent-icon">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Information Confirmation
+                </h3>
+
+                <label class="checkbox-label">
+
+                    <input
+                        type="checkbox"
+                        name="consent"
+                        required>
+
+                    <span>
+                        I confirm that the information provided
+                        is correct to the best of my knowledge.
+                    </span>
+
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= BUTTONS ================= -->
+
+        <div class="form-actions">
+
+            <a href="/" class="cancel-button">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Cancel
+
+            </a>
+
+
+            <button
+                type="reset"
+                class="reset-button">
+
+                <i class="fa-solid fa-rotate-left"></i>
+
+                Clear
+
+            </button>
+
+
+            <button
+                type="submit"
+                class="submit-button">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Register Person
+
+            </button>
+
+        </div>
+
+
+    </form>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div>
+
+        <strong>
+            Together We Rebuild
+        </strong>
+
+        <span>|</span>
+
+        <span>
+            No One Left Behind
+        </span>
+
+    </div>
+
+
+    <div class="footer-badge">
+
+        <i class="fa-regular fa-heart"></i>
+
+        Disaster Relief Technology
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>
