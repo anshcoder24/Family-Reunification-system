@@ -184,7 +184,16 @@
 
         <!-- FORM -->
 
-        <form action="/signin" method="POST">
+        <form action="{{url_for('signin')}}" method="POST">
+        {% if error %}
+        <div class="error_message">
+
+        <i class="fa-solid fa-circle-exclamation"></i>
+
+        {{ error }}
+        
+        </div>
+        {% endif %}
 
 
             <!-- EMAIL / MOBILE -->

@@ -1,51 +1,136 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 from datetime import datetime
 
 app = Flask(__name__)
 
+# Session ke liye
+app.secret_key = "family-reunification-secret-key"
 
-# ================= DATABASE CONNECTION =================
+
+# =====================================================
+# DATABASE
+# =====================================================
 
 def get_db_connection():
     conn = sqlite3.connect("family.db")
+    conn.row_factory = sqlite3.Row
     return conn
 
 
-# ================= HOME =================
+# =====================================================
+# CREATE TABLES + ADMIN USER
+# =====================================================
+
+def create_tables():
+
+    conn = get_db_connection()
+
+    # Registered persons
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS persons (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            age INTEGER NOT NULL,
+            gender TEXT NOT NULL,
+            camp TEXT NOT NULL,
+            family_name TEXT NOT NULL,
+            phone TEXT,
+            created_at TEXT NOT NULL
+        )
+    """)
+
+    # Login users
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL
+        )
+    """)
+
+    # Admin user
+    admin = conn.execute("""
+        SELECT id
+        FROM users
+        WHERE email = ?
+    """, ("admin@gmail.com",)).fetchone()
+
+    if admin is None:
+
+        conn.execute("""
+            INSERT INTO users
+            (name, email, password)
+            VALUES (?, ?, ?)
+        """, (
+            "Admin",
+            "admin@gmail.com",
+            "admin123"
+        ))
+
+    conn.commit()
+    conn.close()
+
+
+# =====================================================
+# HOME
+# =====================================================
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+
+    conn = get_db_connection()
+
+    total_registrations = conn.execute("""
+        SELECT COUNT(*) AS total
+        FROM persons
+    """).fetchone()["total"]
+
+    persons = conn.execute("""
+        SELECT *
+        FROM persons
+        ORDER BY id DESC
+    """).fetchall()
+
+    conn.close()
+
+    return render_template(
+        "index.html",
+        total_registrations=total_registrations,
+        persons=persons
+    )
 
 
-# ================= REGISTER =================
+# =====================================================
+# REGISTER PERSON
+# =====================================================
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
-    # When Register form is submitted
     if request.method == "POST":
 
-        # Required fields
-        name = request.form["name"]
-        age = request.form["age"]
-        gender = request.form["gender"]
-        camp = request.form["camp"]
-        family_name = request.form["family_name"]
+        name = request.form.get("name", "").strip()
+        age = request.form.get("age", "").strip()
+        gender = request.form.get("gender", "").strip()
+        camp = request.form.get("camp", "").strip()
+        family_name = request.form.get("family_name", "").strip()
+        phone = request.form.get("phone", "").strip()
 
-        # Optional fields
-        phone = request.form.get("phone")
+        if not name or not age or not gender or not camp or not family_name:
 
-        # Current date and time
-        created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            return render_template(
+                "register.html",
+                error="Please fill all required fields."
+            )
 
+        created_at = datetime.now().strftime(
+            "%Y-%m-%d %H:%M:%S"
+        )
 
-        # Connect database
         conn = get_db_connection()
 
-
-        # Insert data
         conn.execute("""
             INSERT INTO persons
             (
@@ -68,54 +153,147 @@ def register():
             created_at
         ))
 
-
-        # Save changes
         conn.commit()
-
-        # Close database
         conn.close()
 
+        return redirect(url_for("home"))
 
-        return """
-        <h2>Registration Successful!</h2>
-        <p>Person has been registered successfully.</p>
-        <a href="/register">Register Another Person</a>
-        """
-
-
-    # When page is opened
     return render_template("register.html")
 
 
-# ================= SEARCH =================
+# =====================================================
+# SIGN IN
+# =====================================================
+
+@app.route("/signin", methods=["GET", "POST"])
+def signin():
+
+    if request.method == "POST":
+
+        email = request.form.get("login", "").strip()
+        password = request.form.get("password", "").strip()
+
+        print("================================")
+        print("LOGIN ATTEMPT")
+        print("Email:", email)
+        print("Password:", password)
+
+        conn = get_db_connection()
+
+        user = conn.execute("""
+            SELECT *
+            FROM users
+            WHERE email = ?
+        """, (email,)).fetchone()
+
+        conn.close()
+
+        print("User:", user)
+
+        if user and user["password"] == password:
+
+            # Login session
+            session.clear()
+
+            session["user_id"] = user["id"]
+            session["user_name"] = user["name"]
+
+            print("LOGIN SUCCESS")
+            print("Session:", dict(session))
+
+            return redirect(url_for("dashboard"))
+
+        print("LOGIN FAILED")
+
+        return render_template(
+            "signin.html",
+            error="Invalid email or password."
+        )
+
+    return render_template("signin.html")
+
+
+# =====================================================
+# DASHBOARD
+# =====================================================
+
+@app.route("/dashboard")
+def dashboard():
+
+    print("================================")
+    print("DASHBOARD")
+    print("Session:", dict(session))
+
+    # Login check
+    if "user_id" not in session:
+
+        print("NO LOGIN SESSION")
+
+        return redirect(url_for("signin"))
+
+    conn = get_db_connection()
+
+    total_registrations = conn.execute("""
+        SELECT COUNT(*) AS total
+        FROM persons
+    """).fetchone()["total"]
+
+    persons = conn.execute("""
+        SELECT *
+        FROM persons
+        ORDER BY id DESC
+    """).fetchall()
+
+    conn.close()
+
+    return render_template(
+        "dashboard.html",
+        total_registrations=total_registrations,
+        persons=persons,
+        user_name=session.get("user_name")
+    )
+
+
+# =====================================================
+# LOGOUT
+# =====================================================
+
+@app.route("/logout")
+def logout():
+
+    session.clear()
+
+    return redirect(url_for("home"))
+
+
+# =====================================================
+# OTHER PAGES
+# =====================================================
 
 @app.route("/search")
 def search():
     return "Search Family Member Page"
 
 
-# ================= ABOUT =================
-
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    return "About Page"
 
-
-# ================= SIGN IN =================
-
-@app.route("/signin")
-def signin():
-    return render_template("signin.html")
-
-
-# ================= CAMPS =================
 
 @app.route("/camps")
 def camps():
     return "Camps Page"
 
 
-# ================= RUN APP =================
+# =====================================================
+# RUN
+# =====================================================
 
 if __name__ == "__main__":
-    app.run(debug=True , port=800)
+
+    create_tables()
+
+    app.run(
+        debug=True,
+        port=8000
+    )

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | ReUnite</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='dashboard.css') }}">
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="/" class="logo">
+
+            <i class="fa-solid fa-people-arrows"></i>
+
+            <span>Re<span>Unite</span></span>
+
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="/" >
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+
+            <a href="/search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </a>
+
+            <a href="/camps">
+                <i class="fa-solid fa-tent"></i>
+                Camps
+            </a>
+
+            <a href="/about">
+                <i class="fa-solid fa-circle-info"></i>
+                About
+            </a>
+
+            <a href="/dashboard" class="active">
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+            </a>
+
+        </div>
+
+
+        <div class="user-area">
+
+            <div class="user-icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <span>
+                {{ session["user_name"] }}
+            </span>
+
+            <a href="{{ url_for('logout') }}"
+               class="logout-button">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     PAGE HEADER
+===================================================== -->
+
+<section class="dashboard-header">
+
+    <div class="header-content">
+
+        <div class="breadcrumb">
+
+            <a href="/">
+                Home
+            </a>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <span>
+                Dashboard
+            </span>
+
+        </div>
+
+
+        <h1>
+            Welcome back, {{ session["user_name"] }} 👋
+        </h1>
+
+        <p>
+            Manage registered persons and family reunification
+            records from your dashboard.
+        </p>
+
+    </div>
+
+
+    <div class="header-icon">
+
+        <i class="fa-solid fa-chart-pie"></i>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN DASHBOARD
+===================================================== -->
+
+<main class="dashboard-container">
+
+
+    <!-- =================================================
+         STAT CARDS
+    ================================================== -->
+
+    <section class="stats-grid">
+
+
+        <!-- TOTAL REGISTRATIONS -->
+
+        <div class="stat-card blue">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Total Registrations
+                </span>
+
+                <h2>
+                    {{ total_registrations }}
+                </h2>
+
+                <small>
+                    Registered persons
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECENT -->
+
+        <div class="stat-card green">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Recent Records
+                </span>
+
+                <h2>
+                    {{ persons|length }}
+                </h2>
+
+                <small>
+                    Total records available
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- CAMPS -->
+
+        <div class="stat-card orange">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-tent"></i>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Active Locations
+                </span>
+
+                <h2>
+                    {{ persons|map(attribute='camp')|unique|list|length }}
+                </h2>
+
+                <small>
+                    Locations represented
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =================================================
+         QUICK ACTIONS
+    ================================================== -->
+
+    <section class="quick-actions">
+
+        <div>
+
+            <h2>
+                Quick Actions
+            </h2>
+
+            <p>
+                Manage family reunification records quickly.
+            </p>
+
+        </div>
+
+
+        <div class="action-buttons">
+
+            <a href="{{ url_for('register') }}"
+               class="action-button primary">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Register Person
+
+            </a>
+
+
+            <a href="/search"
+               class="action-button secondary">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                Search Family
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         REGISTERED PERSONS
+    ================================================== -->
+
+    <section class="records-section">
+
+
+        <div class="section-top">
+
+            <div>
+
+                <h2>
+                    Registered Persons
+                </h2>
+
+                <p>
+                    Recently registered people in the system.
+                </p>
+
+            </div>
+
+
+            <div class="record-count">
+
+                <i class="fa-solid fa-database"></i>
+
+                {{ total_registrations }} Records
+
+            </div>
+
+        </div>
+
+
+        <!-- SEARCH BOX -->
+
+        <div class="table-search">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by person name, family member or camp..."
+                onkeyup="searchTable()">
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        {% if persons %}
+
+        <div class="table-wrapper">
+
+            <table id="personTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Person
+                        </th>
+
+                        <th>
+                            Age
+                        </th>
+
+                        <th>
+                            Gender
+                        </th>
+
+                        <th>
+                            Current Location
+                        </th>
+
+                        <th>
+                            Family Member
+                        </th>
+
+                        <th>
+                            Phone
+                        </th>
+
+                        <th>
+                            Registered
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for person in persons %}
+
+                    <tr>
+
+                        <td>
+
+                            <span class="person-id">
+                                #{{ person["id"] }}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="person-name">
+
+                                <div class="small-avatar">
+
+                                    <i class="fa-solid fa-user"></i>
+
+                                </div>
+
+                                <strong>
+                                    {{ person["name"] }}
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            {{ person["age"] }}
+                        </td>
+
+
+                        <td>
+
+                            <span class="gender-badge">
+
+                                {{ person["gender"] }}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="location">
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                {{ person["camp"] }}
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                {{ person["family_name"] }}
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            {% if person["phone"] %}
+
+                                {{ person["phone"] }}
+
+                            {% else %}
+
+                                <span class="not-available">
+                                    Not provided
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="date">
+
+                                {{ person["created_at"] }}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <!-- EMPTY STATE -->
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+            <h3>
+                No Registrations Yet
+            </h3>
+
+            <p>
+                There are currently no registered persons.
+            </p>
+
+            <a href="{{ url_for('register') }}"
+               class="action-button primary">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Register First Person
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+
+    </section>
+
+
+    <!-- =================================================
+         INFORMATION NOTE
+    ================================================== -->
+
+    <div class="security-note">
+
+        <div class="note-icon">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+        </div>
+
+        <div>
+
+            <strong>
+                Secure Information
+            </strong>
+
+            <p>
+                Registration information should only be accessed
+                by authorized staff members.
+            </p>
+
+        </div>
+
+    </div>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div>
+
+        <strong>
+            Together We Rebuild
+        </strong>
+
+        <span>|</span>
+
+        <span>
+            No One Left Behind
+        </span>
+
+    </div>
+
+
+    <div class="footer-badge">
+
+        <i class="fa-regular fa-heart"></i>
+
+        Disaster Relief Technology
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     SEARCH SCRIPT
+===================================================== -->
+
+<script>
+
+function searchTable() {
+
+    const input =
+        document.getElementById("searchInput");
+
+    const filter =
+        input.value.toLowerCase();
+
+    const table =
+        document.getElementById("personTable");
+
+    const rows =
+        table.getElementsByTagName("tr");
+
+
+    for (let i = 1; i < rows.length; i++) {
+
+        const rowText =
+            rows[i].textContent.toLowerCase();
+
+        if (rowText.includes(filter)) {
+
+            rows[i].style.display = "";
+
+        } else {
+
+            rows[i].style.display = "none";
+
+        }
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>
