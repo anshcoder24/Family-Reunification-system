@@ -10,9 +10,11 @@
 
     <title>Register Person | ReUnite</title>
 
+    <!-- Font Awesome -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+    <!-- Register CSS -->
     <link rel="stylesheet"
           href="{{ url_for('static', filename='register.css') }}">
 
@@ -21,42 +23,73 @@
 <body>
 
 
-<!-- ================= NAVBAR ================= -->
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
 
 <nav class="navbar">
 
     <div class="nav-container">
 
+        <!-- LOGO -->
+
         <a href="/" class="logo">
+
             <i class="fa-solid fa-people-arrows"></i>
-            <span>Re<span>Unite</span></span>
+
+            <span>
+                Re<span>Unite</span>
+            </span>
+
         </a>
+
+
+        <!-- NAVIGATION -->
 
         <div class="nav-links">
 
             <a href="/">
+
                 <i class="fa-solid fa-house"></i>
+
                 Home
+
             </a>
+
 
             <a href="/search">
+
                 <i class="fa-solid fa-magnifying-glass"></i>
+
                 Search
+
             </a>
+
 
             <a href="/about">
+
                 <i class="fa-solid fa-circle-info"></i>
+
                 About
+
             </a>
+
 
             <a href="/register" class="active">
+
                 <i class="fa-solid fa-user-plus"></i>
+
                 Register
+
             </a>
 
+
             <a href="/signin">
+
                 <i class="fa-solid fa-right-to-bracket"></i>
+
                 Sign In
+
             </a>
 
         </div>
@@ -66,7 +99,10 @@
 </nav>
 
 
-<!-- ================= PAGE HEADER ================= -->
+
+<!-- =====================================================
+     PAGE HEADER
+===================================================== -->
 
 <section class="page-header">
 
@@ -74,17 +110,23 @@
 
         <div class="breadcrumb">
 
-            <a href="/">Home</a>
+            <a href="/">
+                Home
+            </a>
 
             <i class="fa-solid fa-chevron-right"></i>
 
-            <span>Register Person</span>
+            <span>
+                Register Person
+            </span>
 
         </div>
+
 
         <h1>
             Register Person
         </h1>
+
 
         <p>
             Register a displaced person to help reconnect
@@ -103,7 +145,30 @@
 </section>
 
 
-<!-- ================= OFFLINE STATUS ================= -->
+
+<!-- =====================================================
+     ERROR MESSAGE
+===================================================== -->
+
+{% if error %}
+
+<div class="error-message">
+
+    <i class="fa-solid fa-circle-exclamation"></i>
+
+    <span>
+        {{ error }}
+    </span>
+
+</div>
+
+{% endif %}
+
+
+
+<!-- =====================================================
+     OFFLINE STATUS
+===================================================== -->
 
 <div class="offline-status">
 
@@ -113,15 +178,19 @@
 
     </div>
 
+
     <div>
 
-        <strong>Offline Mode</strong>
+        <strong>
+            Offline Mode
+        </strong>
 
         <p>
-            Registration can be saved even without internet.
+            Registration can be saved locally.
         </p>
 
     </div>
+
 
     <span class="pending">
 
@@ -134,16 +203,21 @@
 </div>
 
 
-<!-- ================= REGISTRATION FORM ================= -->
+
+<!-- =====================================================
+     REGISTRATION FORM
+===================================================== -->
 
 <main class="form-container">
 
-    <form action="/register"
+    <form action="{{ url_for('register') }}"
           method="POST"
           enctype="multipart/form-data">
 
 
-        <!-- ================= PERSONAL DETAILS ================= -->
+        <!-- =================================================
+             PERSONAL DETAILS
+        ================================================== -->
 
         <section class="form-section">
 
@@ -155,9 +229,12 @@
 
                 </div>
 
+
                 <div>
 
-                    <h2>Personal Details</h2>
+                    <h2>
+                        Personal Details
+                    </h2>
 
                     <p>
                         Basic information of the displaced person.
@@ -166,6 +243,7 @@
                 </div>
 
             </div>
+
 
 
             <div class="form-grid">
@@ -183,6 +261,7 @@
 
                     </label>
 
+
                     <div class="input-box">
 
                         <i class="fa-solid fa-user"></i>
@@ -199,6 +278,7 @@
                 </div>
 
 
+
                 <!-- AGE -->
 
                 <div class="form-group">
@@ -210,6 +290,7 @@
                         <span>*</span>
 
                     </label>
+
 
                     <div class="input-box">
 
@@ -229,6 +310,7 @@
                 </div>
 
 
+
                 <!-- GENDER -->
 
                 <div class="form-group">
@@ -241,9 +323,11 @@
 
                     </label>
 
+
                     <div class="input-box">
 
                         <i class="fa-solid fa-venus-mars"></i>
+
 
                         <select
                             id="gender"
@@ -277,7 +361,10 @@
         </section>
 
 
-        <!-- ================= LOCATION ================= -->
+
+        <!-- =================================================
+             CURRENT LOCATION
+        ================================================== -->
 
         <section class="form-section">
 
@@ -289,9 +376,12 @@
 
                 </div>
 
+
                 <div>
 
-                    <h2>Current Location</h2>
+                    <h2>
+                        Current Location
+                    </h2>
 
                     <p>
                         Where the person is currently staying.
@@ -300,6 +390,7 @@
                 </div>
 
             </div>
+
 
 
             <div class="form-group">
@@ -317,6 +408,7 @@
 
                     <i class="fa-solid fa-tent"></i>
 
+
                     <input
                         type="text"
                         id="camp"
@@ -331,7 +423,10 @@
         </section>
 
 
-        <!-- ================= FAMILY INFORMATION ================= -->
+
+        <!-- =================================================
+             FAMILY INFORMATION
+        ================================================== -->
 
         <section class="form-section">
 
@@ -343,9 +438,12 @@
 
                 </div>
 
+
                 <div>
 
-                    <h2>Family Information</h2>
+                    <h2>
+                        Family Information
+                    </h2>
 
                     <p>
                         Information about the family member they want to find.
@@ -354,6 +452,7 @@
                 </div>
 
             </div>
+
 
 
             <div class="form-group">
@@ -371,6 +470,7 @@
 
                     <i class="fa-solid fa-user-group"></i>
 
+
                     <input
                         type="text"
                         id="family_name"
@@ -385,7 +485,10 @@
         </section>
 
 
-        <!-- ================= OPTIONAL INFORMATION ================= -->
+
+        <!-- =================================================
+             ADDITIONAL INFORMATION
+        ================================================== -->
 
         <section class="form-section">
 
@@ -397,9 +500,12 @@
 
                 </div>
 
+
                 <div>
 
-                    <h2>Additional Information</h2>
+                    <h2>
+                        Additional Information
+                    </h2>
 
                     <p>
                         These details are optional.
@@ -410,7 +516,8 @@
             </div>
 
 
-            <!-- MOBILE -->
+
+            <!-- MOBILE NUMBER -->
 
             <div class="form-group">
 
@@ -418,7 +525,9 @@
 
                     Mobile Number
 
-                    <small>(Optional)</small>
+                    <small>
+                        (Optional)
+                    </small>
 
                 </label>
 
@@ -426,6 +535,7 @@
                 <div class="input-box">
 
                     <i class="fa-solid fa-phone"></i>
+
 
                     <input
                         type="tel"
@@ -437,6 +547,7 @@
                 </div>
 
             </div>
+
 
 
             <!-- PHOTO -->
@@ -453,22 +564,31 @@
                 <div class="photo-content">
 
                     <h3>
+
                         Person Photo
-                        <small>(Optional)</small>
+
+                        <small>
+                            (Optional)
+                        </small>
+
                     </h3>
+
 
                     <p>
                         A photo can help with identification.
                     </p>
 
-                    <label for="photo"
-                           class="upload-button">
+
+                    <label
+                        for="photo"
+                        class="upload-button">
 
                         <i class="fa-solid fa-upload"></i>
 
                         Upload Photo
 
                     </label>
+
 
                     <input
                         type="file"
@@ -484,7 +604,138 @@
         </section>
 
 
-        <!-- ================= CONSENT ================= -->
+
+        <!-- =================================================
+             CREATE USER ACCOUNT
+        ================================================== -->
+
+        <section class="form-section account-section">
+
+            <div class="section-heading">
+
+                <div class="section-icon blue">
+
+                    <i class="fa-solid fa-user-lock"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h2>
+                        Create Your Account
+                    </h2>
+
+                    <p>
+                        Use this account later to check your registration status.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+
+                    Email Address
+
+                    <span>*</span>
+
+                </label>
+
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        required>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+
+                    Create Password
+
+                    <span>*</span>
+
+                </label>
+
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        minlength="6"
+                        required>
+
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword()">
+
+                        <i
+                            class="fa-solid fa-eye"
+                            id="eyeIcon">
+                        </i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACCOUNT INFORMATION -->
+
+            <div class="account-note">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+
+                <span>
+
+                    Remember your email and password.
+                    You will use them to sign in and check
+                    your family reunification status.
+
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CONSENT
+        ================================================== -->
 
         <section class="consent-section">
 
@@ -501,6 +752,7 @@
                     Information Confirmation
                 </h3>
 
+
                 <label class="checkbox-label">
 
                     <input
@@ -508,9 +760,12 @@
                         name="consent"
                         required>
 
+
                     <span>
+
                         I confirm that the information provided
                         is correct to the best of my knowledge.
+
                     </span>
 
                 </label>
@@ -520,11 +775,19 @@
         </section>
 
 
-        <!-- ================= BUTTONS ================= -->
+
+        <!-- =================================================
+             FORM BUTTONS
+        ================================================== -->
 
         <div class="form-actions">
 
-            <a href="/" class="cancel-button">
+
+            <!-- CANCEL -->
+
+            <a
+                href="/"
+                class="cancel-button">
 
                 <i class="fa-solid fa-arrow-left"></i>
 
@@ -532,6 +795,9 @@
 
             </a>
 
+
+
+            <!-- CLEAR -->
 
             <button
                 type="reset"
@@ -543,6 +809,9 @@
 
             </button>
 
+
+
+            <!-- REGISTER -->
 
             <button
                 type="submit"
@@ -556,13 +825,15 @@
 
         </div>
 
-
     </form>
 
 </main>
 
 
-<!-- ================= FOOTER ================= -->
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
@@ -572,7 +843,9 @@
             Together We Rebuild
         </strong>
 
-        <span>|</span>
+        <span>
+            |
+        </span>
 
         <span>
             No One Left Behind
@@ -590,6 +863,47 @@
     </div>
 
 </footer>
+
+
+
+<!-- =====================================================
+     PASSWORD SCRIPT
+===================================================== -->
+
+<script>
+
+function togglePassword() {
+
+    const password =
+        document.getElementById("password");
+
+    const icon =
+        document.getElementById("eyeIcon");
+
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        icon.classList.remove("fa-eye");
+
+        icon.classList.add("fa-eye-slash");
+
+    }
+
+    else {
+
+        password.type = "password";
+
+        icon.classList.remove("fa-eye-slash");
+
+        icon.classList.add("fa-eye");
+
+    }
+
+}
+
+</script>
 
 
 </body>

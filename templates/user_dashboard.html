@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Status | ReUnite</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+          
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='user_dashboard.css') }}">
+
+</head>
+
+<body>
+
+
+<nav>
+
+    <div class="logo">
+
+        <i class="fa-solid fa-people-arrows"></i>
+
+        ReUnite
+
+    </div>
+
+
+    <div>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="user-dashboard">
+
+
+    <div class="welcome">
+
+        <span>
+            Welcome
+        </span>
+
+        <h1>
+            {{ person["name"] }}
+        </h1>
+
+        <p>
+            Here you can check your family reunification status.
+        </p>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div class="status-card">
+
+        <div class="status-icon">
+
+            {% if person["status"] == "Reunited" %}
+
+                <i class="fa-solid fa-heart"></i>
+
+            {% else %}
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            {% endif %}
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Current Status
+            </span>
+
+            <h2>
+                {{ person["status"] }}
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- PERSONAL INFORMATION -->
+
+    <div class="info-card">
+
+        <h2>
+            <i class="fa-solid fa-user"></i>
+            My Registration
+        </h2>
+
+
+        <div class="info-grid">
+
+            <div>
+
+                <span>Name</span>
+
+                <strong>
+                    {{ person["name"] }}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>Age</span>
+
+                <strong>
+                    {{ person["age"] }}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>Gender</span>
+
+                <strong>
+                    {{ person["gender"] }}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>Current Camp</span>
+
+                <strong>
+                    {{ person["camp"] }}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>Family Member</span>
+
+                <strong>
+                    {{ person["family_name"] }}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>Registration Date</span>
+
+                <strong>
+                    {{ person["created_at"] }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div class="message-card">
+
+        {% if person["status"] == "Reunited" %}
+
+            <i class="fa-solid fa-heart"></i>
+
+            <div>
+
+                <h3>
+                    Family Match Found
+                </h3>
+
+                <p>
+                    Your family reunification process has
+                    been completed.
+                </p>
+
+            </div>
+
+        {% else %}
+
+            <i class="fa-solid fa-clock"></i>
+
+            <div>
+
+                <h3>
+                    Your case is being processed
+                </h3>
+
+                <p>
+                    Please check this page again later
+                    for status updates.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+</main>
+
+</body>
+
+</html>

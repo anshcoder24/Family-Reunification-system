@@ -1,6 +1,6 @@
 /* =====================================================
-   RESET
-===================================================== */
+   REUNITE - SIGN IN PAGE
+   ===================================================== */
 
 * {
     margin: 0;
@@ -10,576 +10,389 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-
-    background: #f6f9fc;
-
-    color: #17233d;
-
+    background: #f5f8fc;
+    color: #1f2937;
     min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
 }
 
 
 /* =====================================================
    NAVBAR
-===================================================== */
+   ===================================================== */
 
 .navbar {
-    height: 76px;
-
+    width: 100%;
     background: #ffffff;
 
-    border-bottom: 1px solid #e5ebf2;
+    border-bottom: 1px solid #e5eaf0;
 
-    box-shadow: 0 2px 12px rgba(20, 45, 80, 0.05);
+    padding: 17px 7%;
+
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
+
 .nav-container {
-    max-width: 1250px;
-
-    height: 100%;
-
+    max-width: 1200px;
     margin: auto;
 
-    padding: 0 25px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 }
 
 
-/* LOGO */
+/* =====================================================
+   LOGO
+   ===================================================== */
 
 .logo {
     display: flex;
-
     align-items: center;
-
     gap: 10px;
 
     text-decoration: none;
 
-    color: #14213d;
+    color: #1769aa;
 
-    font-size: 23px;
-
+    font-size: 25px;
     font-weight: 800;
 }
 
-.logo i {
-    color: #1769e8;
 
+.logo i {
     font-size: 28px;
 }
 
+
 .logo span span {
-    color: #1769e8;
+    color: #2386d7;
 }
 
 
-/* NAV LINKS */
+/* =====================================================
+   NAV LINKS
+   ===================================================== */
 
 .nav-links {
     display: flex;
-
     align-items: center;
-
-    gap: 28px;
+    gap: 5px;
 }
 
+
 .nav-links a {
-    position: relative;
-
-    height: 76px;
-
     display: flex;
-
     align-items: center;
-
     gap: 7px;
 
     text-decoration: none;
 
-    color: #4b5870;
+    color: #475569;
 
     font-size: 14px;
-
     font-weight: 600;
 
-    transition: 0.2s;
+    padding: 10px 14px;
+
+    border-radius: 8px;
+
+    transition: all 0.25s ease;
 }
+
 
 .nav-links a:hover {
-    color: #1769e8;
+    color: #1769aa;
+    background: #eef6ff;
 }
+
 
 .nav-links a.active {
-    color: #1769e8;
+    color: #1769aa;
+    background: #eaf4ff;
 }
 
-.nav-links a.active::after {
-    content: "";
 
-    position: absolute;
-
-    bottom: 0;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: 35px;
-
-    height: 3px;
-
-    background: #1769e8;
-
-    border-radius: 10px;
+.nav-links i {
+    font-size: 14px;
 }
 
 
 /* =====================================================
-   MAIN SIGN IN
-===================================================== */
+   MAIN
+   ===================================================== */
 
 .signin-page {
-    max-width: 1050px;
+    flex: 1;
 
-    min-height: calc(100vh - 152px);
-
-    margin: auto;
-
-    padding: 55px 25px;
-
-    display: grid;
-
-    grid-template-columns: 1fr 430px;
-
-    align-items: center;
-
-    gap: 80px;
-}
-
-
-/* =====================================================
-   LEFT INFORMATION
-===================================================== */
-
-.signin-info {
-    padding: 20px 0;
-}
-
-.info-icon {
-    width: 65px;
-
-    height: 65px;
-
-    border-radius: 16px;
-
-    background: #e7f0ff;
-
-    color: #1769e8;
+    width: 100%;
 
     display: flex;
-
-    align-items: center;
-
     justify-content: center;
-
-    font-size: 27px;
-
-    margin-bottom: 22px;
-}
-
-.signin-info h1 {
-    font-size: 38px;
-
-    color: #12213d;
-
-    margin-bottom: 12px;
-}
-
-.signin-info > p {
-    max-width: 480px;
-
-    color: #6e7c91;
-
-    font-size: 15px;
-
-    line-height: 1.7;
-
-    margin-bottom: 32px;
-}
-
-
-/* INFORMATION ITEMS */
-
-.info-item {
-    display: flex;
-
     align-items: center;
 
-    gap: 14px;
-
-    margin-bottom: 19px;
-}
-
-.item-icon {
-    width: 42px;
-
-    height: 42px;
-
-    flex-shrink: 0;
-
-    border-radius: 10px;
-
-    background: #ffffff;
-
-    border: 1px solid #e0e7ef;
-
-    color: #1769e8;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    box-shadow: 0 3px 10px rgba(20, 45, 80, 0.04);
-}
-
-.info-item strong {
-    display: block;
-
-    color: #253651;
-
-    font-size: 14px;
-
-    margin-bottom: 3px;
-}
-
-.info-item span {
-    color: #7a879a;
-
-    font-size: 12px;
+    padding: 55px 20px;
 }
 
 
 /* =====================================================
    SIGN IN CARD
-===================================================== */
+   ===================================================== */
 
 .signin-card {
+    width: 100%;
+    max-width: 650px;
+
     background: #ffffff;
 
-    border: 1px solid #e1e7ef;
+    border: 1px solid #e2e8f0;
 
-    border-radius: 16px;
+    border-radius: 20px;
 
-    padding: 32px;
+    padding: 40px;
 
     box-shadow:
-        0 8px 30px rgba(24, 52, 88, 0.08);
+        0 15px 40px rgba(15, 23, 42, 0.08);
 }
 
 
-/* CARD HEADER */
+/* =====================================================
+   CARD HEADER
+   ===================================================== */
 
 .card-header {
     text-align: center;
 
-    margin-bottom: 28px;
+    margin-bottom: 32px;
 }
 
+
 .login-icon {
-    width: 55px;
+    width: 70px;
+    height: 70px;
 
-    height: 55px;
+    margin: 0 auto 18px;
 
-    margin: 0 auto 14px;
+    border-radius: 50%;
+
+    background: #eaf4ff;
+
+    color: #1769aa;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+}
+
+
+.card-header h1 {
+    color: #1e3a5f;
+
+    font-size: 30px;
+
+    margin-bottom: 9px;
+}
+
+
+.card-header p {
+    color: #64748b;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   LOGIN OPTIONS
+   ===================================================== */
+
+.login-options {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+/* =====================================================
+   LOGIN OPTION CARD
+   ===================================================== */
+
+.login-option {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 22px;
+
+    text-decoration: none;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe7ef;
 
     border-radius: 14px;
 
-    background: #e7f0ff;
-
-    color: #1769e8;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 22px;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
 }
 
-.card-header h2 {
-    color: #172643;
 
-    font-size: 25px;
+.login-option:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(15, 23, 42, 0.09);
+}
+
+
+/* =====================================================
+   OPTION ICON
+   ===================================================== */
+
+.option-icon {
+    width: 58px;
+    height: 58px;
+
+    min-width: 58px;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+}
+
+
+/* ADMIN */
+
+.admin-option {
+    border-left: 4px solid #1769aa;
+}
+
+
+.admin-option .option-icon {
+    background: #eaf4ff;
+    color: #1769aa;
+}
+
+
+.admin-option:hover {
+    border-color: #8fc5ed;
+}
+
+
+/* USER */
+
+.user-option {
+    border-left: 4px solid #2e8b68;
+}
+
+
+.user-option .option-icon {
+    background: #eaf8f2;
+    color: #2e8b68;
+}
+
+
+.user-option:hover {
+    border-color: #91d4b8;
+}
+
+
+/* =====================================================
+   OPTION CONTENT
+   ===================================================== */
+
+.option-content {
+    flex: 1;
+}
+
+
+.option-content h2 {
+    color: #1e293b;
+
+    font-size: 19px;
 
     margin-bottom: 6px;
 }
 
-.card-header p {
-    color: #7b8799;
 
-    font-size: 12px;
-}
-
-
-/* =====================================================
-   FORM
-===================================================== */
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-
-    color: #34435c;
+.option-content p {
+    color: #64748b;
 
     font-size: 13px;
 
-    font-weight: 700;
+    line-height: 1.55;
 
-    margin-bottom: 8px;
-}
-
-
-/* PASSWORD LABEL */
-
-.password-label {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 8px;
-}
-
-.password-label label {
-    margin-bottom: 0;
-}
-
-.password-label a {
-    color: #1769e8;
-
-    font-size: 11px;
-
-    text-decoration: none;
-
-    font-weight: 600;
-}
-
-.password-label a:hover {
-    text-decoration: underline;
+    max-width: 470px;
 }
 
 
 /* =====================================================
-   INPUT
-===================================================== */
+   ARROW
+   ===================================================== */
 
-.input-box {
-    width: 100%;
+.arrow {
+    color: #94a3b8;
 
-    height: 48px;
+    font-size: 17px;
 
-    display: flex;
-
-    align-items: center;
-
-    background: #ffffff;
-
-    border: 1px solid #d6dee9;
-
-    border-radius: 8px;
-
-    transition: 0.2s;
-}
-
-.input-box:focus-within {
-    border-color: #1769e8;
-
-    box-shadow:
-        0 0 0 3px rgba(23, 105, 232, 0.09);
-}
-
-.input-box > i {
-    width: 43px;
-
-    text-align: center;
-
-    color: #8997aa;
-
-    font-size: 14px;
-}
-
-.input-box input {
-    flex: 1;
-
-    height: 100%;
-
-    border: none;
-
-    outline: none;
-
-    background: transparent;
-
-    color: #263650;
-
-    font-size: 13px;
-
-    font-family: inherit;
-}
-
-.input-box input::placeholder {
-    color: #a1adbd;
+    transition: transform 0.25s ease;
 }
 
 
-/* SHOW PASSWORD */
-
-.show-password {
-    width: 42px;
-
-    height: 100%;
-
-    border: none;
-
-    background: transparent;
-
-    color: #8997aa;
-
-    cursor: pointer;
-
-    font-size: 14px;
-}
-
-.show-password:hover {
-    color: #1769e8;
-}
-
-
-/* =====================================================
-   REMEMBER ME
-===================================================== */
-
-.remember {
-    margin-top: -5px;
-
-    margin-bottom: 20px;
-}
-
-.remember label {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    cursor: pointer;
-
-    color: #65738a;
-
-    font-size: 12px;
-}
-
-.remember input {
-    width: 15px;
-
-    height: 15px;
-
-    accent-color: #1769e8;
-
-    cursor: pointer;
-}
-
-
-/* =====================================================
-   SIGN IN BUTTON
-===================================================== */
-
-.signin-button {
-    width: 100%;
-
-    height: 47px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #1769e8;
-
-    color: #ffffff;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    font-family: inherit;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 5px 12px rgba(23, 105, 232, 0.18);
-
-    transition: 0.2s;
-}
-
-.signin-button:hover {
-    background: #0d56c7;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 7px 16px rgba(23, 105, 232, 0.23);
+.login-option:hover .arrow {
+    transform: translateX(5px);
 }
 
 
 /* =====================================================
    REGISTER LINK
-===================================================== */
+   ===================================================== */
 
 .register-link {
     text-align: center;
 
-    margin-top: 22px;
+    margin-top: 28px;
 
-    padding-top: 20px;
+    padding-top: 24px;
 
     border-top: 1px solid #edf1f5;
 
-    font-size: 12px;
+    color: #64748b;
+
+    font-size: 14px;
 }
 
-.register-link span {
-    color: #7b8799;
-}
 
 .register-link a {
-    color: #1769e8;
+    color: #1769aa;
 
     text-decoration: none;
 
     font-weight: 700;
 
-    margin-left: 4px;
+    margin-left: 5px;
 }
+
 
 .register-link a:hover {
     text-decoration: underline;
@@ -587,101 +400,57 @@ body {
 
 
 /* =====================================================
-   SECURITY NOTE
-===================================================== */
-
-.security-note {
-    margin-top: 18px;
-
-    padding: 11px;
-
-    border-radius: 7px;
-
-    background: #f4f8fd;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    color: #7a879a;
-
-    font-size: 10px;
-}
-
-.security-note i {
-    color: #1769e8;
-}
-
-
-/* =====================================================
    FOOTER
-===================================================== */
+   ===================================================== */
 
 footer {
-    min-height: 76px;
+    width: 100%;
 
-    background: #081a38;
+    background: #ffffff;
 
-    color: #ffffff;
+    border-top: 1px solid #e5eaf0;
 
-    padding: 18px 35px;
+    padding: 18px 20px;
 
     display: flex;
-
+    justify-content: center;
     align-items: center;
 
-    justify-content: center;
+    gap: 10px;
 
-    gap: 25px;
+    color: #64748b;
 
-    font-size: 12px;
+    font-size: 13px;
 }
 
-footer span {
-    color: #8290a7;
 
-    margin: 0 5px;
-}
-
-.footer-badge {
-    padding: 8px 13px;
-
-    border: 1px solid #53627a;
-
-    border-radius: 7px;
-
-    color: #d6deea;
-}
-
-.footer-badge i {
-    color: #ff7188;
-
-    margin-right: 5px;
+footer strong {
+    color: #1769aa;
 }
 
 
 /* =====================================================
    TABLET
-===================================================== */
+   ===================================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 850px) {
 
-    .signin-page {
-        grid-template-columns: 1fr 400px;
+    .navbar {
+        padding: 15px 4%;
+    }
 
-        gap: 40px;
+    .nav-container {
+        flex-direction: column;
+        gap: 14px;
     }
 
     .nav-links {
-        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
-    .nav-links a {
-        font-size: 12px;
+    .signin-page {
+        padding: 40px 18px;
     }
 
 }
@@ -689,141 +458,141 @@ footer span {
 
 /* =====================================================
    MOBILE
-===================================================== */
+   ===================================================== */
 
-@media (max-width: 700px) {
-
-    .navbar {
-        height: auto;
-    }
-
-    .nav-container {
-        padding: 14px 20px;
-
-        flex-direction: column;
-
-        gap: 12px;
-    }
-
-    .nav-links {
-        width: 100%;
-
-        justify-content: center;
-
-        flex-wrap: wrap;
-
-        gap: 8px;
-    }
-
-    .nav-links a {
-        height: 34px;
-
-        padding: 0 8px;
-    }
-
-    .nav-links a.active::after {
-        display: none;
-    }
-
+@media (max-width: 600px) {
 
     .signin-page {
-        min-height: auto;
-
-        grid-template-columns: 1fr;
-
-        padding: 35px 20px 45px;
-
-        gap: 25px;
-    }
-
-
-    .signin-info {
-        text-align: center;
-
-        padding: 0;
-    }
-
-    .info-icon {
-        margin-left: auto;
-
-        margin-right: auto;
-    }
-
-    .signin-info h1 {
-        font-size: 30px;
-    }
-
-    .signin-info > p {
-        margin-left: auto;
-
-        margin-right: auto;
-    }
-
-    .info-item {
-        max-width: 300px;
-
-        margin-left: auto;
-
-        margin-right: auto;
-
-        text-align: left;
+        padding: 30px 15px;
+        align-items: flex-start;
     }
 
 
     .signin-card {
-        max-width: 430px;
+        padding: 28px 20px;
 
-        width: 100%;
+        border-radius: 16px;
+    }
 
-        margin: auto;
 
-        padding: 25px;
+    .logo {
+        font-size: 22px;
+    }
+
+
+    .logo i {
+        font-size: 24px;
+    }
+
+
+    .nav-links {
+        gap: 2px;
+    }
+
+
+    .nav-links a {
+        padding: 8px 8px;
+
+        font-size: 12px;
+    }
+
+
+    .nav-links a i {
+        display: none;
+    }
+
+
+    .card-header {
+        margin-bottom: 25px;
+    }
+
+
+    .login-icon {
+        width: 60px;
+        height: 60px;
+
+        font-size: 24px;
+    }
+
+
+    .card-header h1 {
+        font-size: 25px;
+    }
+
+
+    .card-header p {
+        font-size: 13px;
+    }
+
+
+    .login-option {
+        padding: 18px 15px;
+
+        gap: 12px;
+    }
+
+
+    .option-icon {
+        width: 48px;
+        height: 48px;
+
+        min-width: 48px;
+
+        font-size: 20px;
+    }
+
+
+    .option-content h2 {
+        font-size: 16px;
+    }
+
+
+    .option-content p {
+        font-size: 12px;
+    }
+
+
+    .arrow {
+        font-size: 14px;
     }
 
 
     footer {
-        flex-direction: column;
-
-        gap: 10px;
+        flex-wrap: wrap;
 
         text-align: center;
+
+        font-size: 12px;
     }
 
 }
 
 
 /* =====================================================
-   SMALL MOBILE
-===================================================== */
+   VERY SMALL SCREEN
+   ===================================================== */
 
-@media (max-width: 450px) {
-
-    .logo {
-        font-size: 20px;
-    }
+@media (max-width: 400px) {
 
     .nav-links a {
-        background: #f4f7fb;
+        padding: 7px 6px;
 
-        border-radius: 6px;
+        font-size: 11px;
     }
 
-    .nav-links a.active {
-        background: #e7f0ff;
-    }
-
-    .signin-page {
-        padding-left: 15px;
-
-        padding-right: 15px;
-    }
 
     .signin-card {
-        padding: 21px;
+        padding: 24px 15px;
     }
 
-    .signin-info h1 {
-        font-size: 27px;
+
+    .login-option {
+        gap: 10px;
+    }
+
+
+    .option-content p {
+        display: none;
     }
 
 }

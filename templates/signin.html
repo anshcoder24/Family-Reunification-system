@@ -5,7 +5,8 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Sign In | ReUnite</title>
 
@@ -19,21 +20,14 @@
 
 <body>
 
-
-<!-- ================= NAVBAR ================= -->
-
 <nav class="navbar">
 
     <div class="nav-container">
 
         <a href="/" class="logo">
-
             <i class="fa-solid fa-people-arrows"></i>
-
             <span>Re<span>Unite</span></span>
-
         </a>
-
 
         <div class="nav-links">
 
@@ -69,263 +63,91 @@
 </nav>
 
 
-<!-- ================= MAIN ================= -->
-
 <main class="signin-page">
-
-
-    <!-- LEFT INFORMATION -->
-
-    <div class="signin-info">
-
-        <div class="info-icon">
-
-            <i class="fa-solid fa-people-arrows"></i>
-
-        </div>
-
-        <h1>
-            Welcome Back
-        </h1>
-
-        <p>
-            Sign in to access the Family Reunification
-            System and help reconnect families.
-        </p>
-
-
-        <div class="info-item">
-
-            <div class="item-icon">
-
-                <i class="fa-solid fa-shield-halved"></i>
-
-            </div>
-
-            <div>
-
-                <strong>Secure Access</strong>
-
-                <span>
-                    Your information is protected.
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="info-item">
-
-            <div class="item-icon">
-
-                <i class="fa-solid fa-database"></i>
-
-            </div>
-
-            <div>
-
-                <strong>Manage Records</strong>
-
-                <span>
-                    Access registered person records.
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="info-item">
-
-            <div class="item-icon">
-
-                <i class="fa-solid fa-people-group"></i>
-
-            </div>
-
-            <div>
-
-                <strong>Reconnect Families</strong>
-
-                <span>
-                    Help families find their loved ones.
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- SIGN IN CARD -->
 
     <div class="signin-card">
 
         <div class="card-header">
 
             <div class="login-icon">
-
-                <i class="fa-solid fa-user-lock"></i>
-
+                <i class="fa-solid fa-right-to-bracket"></i>
             </div>
 
-            <h2>
-                Sign In
-            </h2>
+            <h1>Sign In</h1>
 
             <p>
-                Sign in to your account
+                Choose how you want to access ReUnite
             </p>
 
         </div>
 
 
-        <!-- FORM -->
-
-        <form action="{{url_for('signin')}}" method="POST">
-        {% if error %}
-        <div class="error_message">
-
-        <i class="fa-solid fa-circle-exclamation"></i>
-
-        {{ error }}
-        
-        </div>
-        {% endif %}
+        <div class="login-options">
 
 
-            <!-- EMAIL / MOBILE -->
+            <!-- ADMIN -->
 
-            <div class="form-group">
+            <a href="/admin-login"
+               class="login-option admin-option">
 
-                <label for="login">
+                <div class="option-icon">
 
-                    Email or Mobile Number
+                    <i class="fa-solid fa-user-shield"></i>
 
-                </label>
+                </div>
+
+                <div class="option-content">
+
+                    <h2>Login as Admin</h2>
+
+                    <p>
+                        Manage registrations, records and
+                        reunification activities.
+                    </p>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right arrow"></i>
+
+            </a>
 
 
-                <div class="input-box">
+            <!-- USER -->
+
+            <a href="/user-login"
+               class="login-option user-option">
+
+                <div class="option-icon">
 
                     <i class="fa-solid fa-user"></i>
 
-                    <input
-                        type="text"
-                        id="login"
-                        name="login"
-                        placeholder="Enter email or mobile number"
-                        required>
+                </div>
+
+                <div class="option-content">
+
+                    <h2>Login as User</h2>
+
+                    <p>
+                        Check your registration and
+                        family reunification status.
+                    </p>
 
                 </div>
 
-            </div>
+                <i class="fa-solid fa-chevron-right arrow"></i>
 
-
-            <!-- PASSWORD -->
-
-            <div class="form-group">
-
-                <div class="password-label">
-
-                    <label for="password">
-                        Password
-                    </label>
-
-                    <a href="#">
-                        Forgot Password?
-                    </a>
-
-                </div>
-
-
-                <div class="input-box">
-
-                    <i class="fa-solid fa-lock"></i>
-
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Enter your password"
-                        required>
-
-                    <button
-                        type="button"
-                        class="show-password"
-                        onclick="togglePassword()">
-
-                        <i class="fa-solid fa-eye"
-                           id="eyeIcon"></i>
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- REMEMBER -->
-
-            <div class="remember">
-
-                <label>
-
-                    <input
-                        type="checkbox"
-                        name="remember">
-
-                    <span>
-                        Remember me
-                    </span>
-
-                </label>
-
-            </div>
-
-
-            <!-- SIGN IN BUTTON -->
-
-            <button
-                type="submit"
-                class="signin-button">
-
-                <i class="fa-solid fa-right-to-bracket"></i>
-
-                Sign In
-
-            </button>
-
-
-        </form>
-
-
-        <!-- REGISTER LINK -->
-
-        <div class="register-link">
-
-            <span>
-                Don't have an account?
-            </span>
-
-            <a href="/register">
-                Register Person
             </a>
 
         </div>
 
 
-        <!-- SECURITY -->
+        <div class="register-link">
 
-        <div class="security-note">
+            Don't have an account?
 
-            <i class="fa-solid fa-shield-halved"></i>
-
-            <span>
-                Your account information is kept secure
-                and private.
-            </span>
+            <a href="/register">
+                Register Person
+            </a>
 
         </div>
 
@@ -334,71 +156,19 @@
 </main>
 
 
-<!-- ================= FOOTER ================= -->
-
 <footer>
 
-    <div>
+    <strong>
+        Together We Rebuild
+    </strong>
 
-        <strong>
-            Together We Rebuild
-        </strong>
+    <span>|</span>
 
-        <span>|</span>
-
-        <span>
-            No One Left Behind
-        </span>
-
-    </div>
-
-
-    <div class="footer-badge">
-
-        <i class="fa-regular fa-heart"></i>
-
-        Disaster Relief Technology
-
-    </div>
+    <span>
+        No One Left Behind
+    </span>
 
 </footer>
-
-
-<!-- ================= PASSWORD SCRIPT ================= -->
-
-<script>
-
-function togglePassword() {
-
-    const password =
-        document.getElementById("password");
-
-    const icon =
-        document.getElementById("eyeIcon");
-
-
-    if (password.type === "password") {
-
-        password.type = "text";
-
-        icon.classList.remove("fa-eye");
-
-        icon.classList.add("fa-eye-slash");
-
-    } else {
-
-        password.type = "password";
-
-        icon.classList.remove("fa-eye-slash");
-
-        icon.classList.add("fa-eye");
-
-    }
-
-}
-
-</script>
-
 
 </body>
 
