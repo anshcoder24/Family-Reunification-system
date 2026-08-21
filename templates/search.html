@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Search Family Member | ReUnite</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='search.css') }}">
+
+</head>
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="/" class="logo">
+
+            <i class="fa-solid fa-people-arrows"></i>
+
+            <span>Re<span>Unite</span></span>
+
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="/">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+
+            <a href="/search" class="active">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </a>
+
+            <a href="/about">
+                <i class="fa-solid fa-circle-info"></i>
+                About
+            </a>
+
+            <a href="/register">
+                <i class="fa-solid fa-user-plus"></i>
+                Register
+            </a>
+
+            <a href="/signin">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Sign In
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HEADER ================= -->
+
+<section class="search-header">
+
+    <div class="header-content">
+
+        <div class="header-icon">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+        </div>
+
+        <h1>Find a Family Member</h1>
+
+        <p>
+            Search registered records to help reconnect
+            families with their loved ones.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SEARCH BOX ================= -->
+
+<main class="search-container">
+
+    <section class="search-card">
+
+        <div class="search-title">
+
+            <i class="fa-solid fa-users"></i>
+
+            <div>
+
+                <h2>Search Family Records</h2>
+
+                <p>
+                    Enter a name, phone number or camp location.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form action="{{ url_for('search') }}"
+              method="POST"
+              class="search-form">
+
+            <div class="search-input">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Enter name, family name, phone or camp..."
+                    value="{{ search_query }}"
+                    required>
+
+            </div>
+
+
+            <button type="submit">
+
+                <i class="fa-solid fa-search"></i>
+
+                Search
+
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- ================= RESULTS ================= -->
+
+    {% if search_query %}
+
+    <section class="results-section">
+
+        <div class="results-header">
+
+            <div>
+
+                <h2>Search Results</h2>
+
+                <p>
+                    Results for:
+                    <strong>{{ search_query }}</strong>
+                </p>
+
+            </div>
+
+            <div class="result-count">
+
+                {{ results|length }} found
+
+            </div>
+
+        </div>
+
+
+        {% if results %}
+
+        <div class="results-grid">
+
+            {% for person in results %}
+
+            <div class="person-card">
+
+                <div class="person-top">
+
+                    <div class="person-icon">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            {{ person["name"] }}
+                        </h3>
+
+                        <span>
+                            Registered Person
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="person-details">
+
+                    <div class="detail">
+
+                        <i class="fa-solid fa-cake-candles"></i>
+
+                        <div>
+                            <small>Age</small>
+                            <strong>{{ person["age"] }}</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <i class="fa-solid fa-venus-mars"></i>
+
+                        <div>
+                            <small>Gender</small>
+                            <strong>{{ person["gender"] }}</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <div>
+                            <small>Current Camp</small>
+                            <strong>{{ person["camp"] }}</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <i class="fa-solid fa-people-group"></i>
+
+                        <div>
+                            <small>Family Member</small>
+                            <strong>{{ person["family_name"] }}</strong>
+                        </div>
+
+                    </div>
+
+
+                    {% if person["phone"] %}
+
+                    <div class="detail">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <div>
+                            <small>Phone</small>
+                            <strong>{{ person["phone"] }}</strong>
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="registration-date">
+
+                    <i class="fa-regular fa-clock"></i>
+
+                    Registered:
+                    {{ person["created_at"] }}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <div class="no-results">
+
+            <div class="no-results-icon">
+
+                <i class="fa-solid fa-user-slash"></i>
+
+            </div>
+
+            <h2>No Family Member Found</h2>
+
+            <p>
+                We couldn't find a record matching
+                "<strong>{{ search_query }}</strong>".
+            </p>
+
+            <a href="/register">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Register a Person
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+    {% endif %}
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div>
+
+        <strong>Together We Rebuild</strong>
+
+        <span>|</span>
+
+        <span>No One Left Behind</span>
+
+    </div>
+
+
+    <div class="footer-badge">
+
+        <i class="fa-regular fa-heart"></i>
+
+        Disaster Relief Technology
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

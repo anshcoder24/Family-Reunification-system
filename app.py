@@ -805,10 +805,42 @@ def logout():
 # SEARCH
 # =====================================================
 
-@app.route("/search")
+@app.route("/search", methods=["GET", "POST"])
 def search():
 
-    return "Search Family Member Page"
+    search_query = ""
+    results = []
+
+    if request.method == "POST":
+
+        search_query = request.form.get("search", "").strip()
+
+        if search_query:
+
+            conn = get_db_connection()
+
+            results = conn.execute("""
+                SELECT *
+                FROM persons
+                WHERE name LIKE ?
+                   OR family_name LIKE ?
+                   OR phone LIKE ?
+                   OR camp LIKE ?
+                ORDER BY id DESC
+            """, (
+                f"%{search_query}%",
+                f"%{search_query}%",
+                f"%{search_query}%",
+                f"%{search_query}%"
+            )).fetchall()
+
+            conn.close()
+
+    return render_template(
+        "search.html",
+        results=results,
+        search_query=search_query
+    )
 
 
 # =====================================================
@@ -830,7 +862,25 @@ def about():
 @app.route("/camps")
 def camps():
 
-    return "Camps Page"
+    conn = get_db_connection()
+
+    camps = conn.execute("""
+        SELECT
+            camp,
+            COUNT(*) AS total_people
+        FROM persons
+        WHERE camp IS NOT NULL
+        AND camp != ''
+        GROUP BY camp
+        ORDER BY camp
+    """).fetchall()
+
+    conn.close()
+
+    return render_template(
+        "camps.html",
+        camps=camps
+    )
 
 
 # =====================================================

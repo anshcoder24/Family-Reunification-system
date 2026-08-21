@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Camps | ReUnite</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='camps.css') }}">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="/" class="logo">
+            <i class="fa-solid fa-people-arrows"></i>
+            <span>Re<span>Unite</span></span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="/">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+
+            <a href="/search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </a>
+
+            <a href="/camps" class="active">
+                <i class="fa-solid fa-tent"></i>
+                Camps
+            </a>
+
+            <a href="/about">
+                <i class="fa-solid fa-circle-info"></i>
+                About
+            </a>
+
+            <a href="/register">
+                <i class="fa-solid fa-user-plus"></i>
+                Register
+            </a>
+
+            <a href="/signin">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Sign In
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- HEADER -->
+
+<section class="page-header">
+
+    <div>
+
+        <div class="breadcrumb">
+
+            <a href="/">Home</a>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <span>Camps</span>
+
+        </div>
+
+        <h1>Relief Camps</h1>
+
+        <p>
+            View registered people and family reunification
+            information by camp.
+        </p>
+
+    </div>
+
+    <div class="header-icon">
+
+        <i class="fa-solid fa-tent"></i>
+
+    </div>
+
+</section>
+
+
+<!-- CAMPS -->
+
+<main class="camps-container">
+
+    {% if camps %}
+
+        <div class="camps-grid">
+
+            {% for camp in camps %}
+
+            <div class="camp-card">
+
+                <div class="camp-icon">
+
+                    <i class="fa-solid fa-tent"></i>
+
+                </div>
+
+                <div class="camp-content">
+
+                    <h2>
+                        {{ camp["camp"] }}
+                    </h2>
+
+                    <p>
+                        <i class="fa-solid fa-location-dot"></i>
+                        Relief Camp
+                    </p>
+
+                    <div class="camp-count">
+
+                        <strong>
+                            {{ camp["total_people"] }}
+                        </strong>
+
+                        <span>
+                            Registered People
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <a href="/search?camp={{ camp['camp'] }}"
+                   class="view-button">
+
+                    View People
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <i class="fa-solid fa-tent"></i>
+
+            <h2>No Camps Found</h2>
+
+            <p>
+                No camp has registered people yet.
+            </p>
+
+            <a href="/register">
+                Register Person
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <strong>
+        Together We Rebuild
+    </strong>
+
+    <span>|</span>
+
+    <span>
+        No One Left Behind
+    </span>
+
+</footer>
+
+</body>
+
+</html>
