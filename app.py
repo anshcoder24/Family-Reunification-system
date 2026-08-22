@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session,flash
 import sqlite3
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -237,10 +237,9 @@ def home():
     conn.close()
 
 
-    return render_template(
-        "index.html",
-        total_registrations=total_registrations
-    )
+    return render_template("index.html",total_registrations=total_registrations)
+    
+    
 
 
 # =====================================================
@@ -623,8 +622,12 @@ def register():
         conn.close()
 
 
+        flash("Registration successful! Your account has been created.", "success")
+
+
+
         return redirect(
-            url_for("user_login")
+            url_for("home")
         )
 
 
@@ -647,7 +650,8 @@ def dashboard():
     if "user_id" not in session:
 
         return redirect(
-            url_for("admin_login")
+            url_for("admin_login" \
+            "")
         )
 
 
