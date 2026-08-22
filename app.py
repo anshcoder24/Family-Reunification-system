@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session,fl
 import sqlite3
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
 
 
 app = Flask(__name__)
@@ -891,28 +892,10 @@ def camps():
 # RUN APPLICATION
 # =====================================================
 
-if __name__ == "__main__":
-
-    create_tables()
 
 
-    print("")
-    print("==============================================")
-    print("       FAMILY REUNIFICATION SYSTEM")
-    print("==============================================")
-    print("")
-    print("Admin Login:")
-    print("Email    : admin@gmail.com")
-    print("Password : admin123")
-    print("")
-    print("Admin Dashboard:")
-    print("http://127.0.0.1:8000/dashboard")
-    print("")
-    print("==============================================")
-    print("")
-
-
-    app.run(
-        debug=True,
-        port=800
-    )
+ 
+    
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 8000))
+    app.run(host='0.0.0.0', port=port)
